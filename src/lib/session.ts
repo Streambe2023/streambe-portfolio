@@ -50,8 +50,9 @@ function verifySessionToken(token: string | undefined): { email: string } | null
   }
 }
 
-export function setSessionCookie(email: string): void {
-  cookies().set(COOKIE_NAME, createSessionToken(email), {
+export async function setSessionCookie(email: string): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set(COOKIE_NAME, createSessionToken(email), {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
@@ -60,18 +61,20 @@ export function setSessionCookie(email: string): void {
   });
 }
 
-export function clearSessionCookie(): void {
-  cookies().set(COOKIE_NAME, "", { path: "/", maxAge: 0 });
+export async function clearSessionCookie(): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set(COOKIE_NAME, "", { path: "/", maxAge: 0 });
 }
 
-export function getSession(): { email: string } | null {
-  const token = cookies().get(COOKIE_NAME)?.value;
+export async function getSession(): Promise<{ email: string } | null> {
+  const cookieStore = await cookies();
+  const token = cookieStore.get(COOKIE_NAME)?.value;
   return verifySessionToken(token);
 }
 
 /** Usar dentro de Server Actions que requieren admin logueado. */
 export async function requireSession(): Promise<{ email: string }> {
-  const session = getSession();
+  const session = await getSession();
   if (!session) {
     redirect("/admin/login");
   }

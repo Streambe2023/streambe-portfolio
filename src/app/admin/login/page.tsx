@@ -5,12 +5,13 @@ const ERROR_MESSAGES: Record<string, string> = {
   invalid: "Email o contraseña incorrectos.",
 };
 
-export default function LoginPage({
+export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: { error?: string };
+  searchParams: Promise<{ error?: string }>;
 }) {
-  const error = searchParams.error ? ERROR_MESSAGES[searchParams.error] : undefined;
+  const { error: errorCode } = await searchParams;
+  const error = errorCode ? ERROR_MESSAGES[errorCode] : undefined;
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-digital px-4">

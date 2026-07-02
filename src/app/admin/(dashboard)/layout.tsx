@@ -3,8 +3,8 @@ import { redirect } from "next/navigation";
 import { getSession } from "@/lib/session";
 import { logoutAction } from "@/lib/actions";
 
-export default function DashboardLayout({ children }: { children: React.ReactNode }) {
-  const session = getSession();
+export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  const session = await getSession();
   if (!session) {
     redirect("/admin/login");
   }

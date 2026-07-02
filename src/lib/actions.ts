@@ -24,12 +24,12 @@ export async function loginAction(formData: FormData): Promise<void> {
     redirect("/admin/login?error=invalid");
   }
 
-  setSessionCookie(email);
+  await setSessionCookie(email);
   redirect("/admin");
 }
 
 export async function logoutAction(): Promise<void> {
-  clearSessionCookie();
+  await clearSessionCookie();
   redirect("/admin/login");
 }
 

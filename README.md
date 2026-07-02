@@ -7,9 +7,9 @@ Landing comercial con el portfolio de proyectos de Streambe + panel de administr
 - **Landing pública (`/`)**: hero con el logo y tagline de Streambe ("Mejor tecnología. Mejor futuro."), grid de tarjetas de proyectos. Cada tarjeta muestra imagen, nombre y descripción, y al hacer click abre la URL del proyecto en una pestaña nueva.
 - **Panel admin (`/admin`)**: login restringido a `@streambe.com` + contraseña, listado de proyectos, alta, edición y baja.
 - **Marca**: colores y tipografías tomados del Manual de Marca de Streambe v1.0 (azul "Tech" `#0253E8`, celeste "Soft" `#2FB1FE`, marino "Digital" `#10192B`, tipografías Familjen Grotesk + Inter).
-- **Stack**: Next.js 14 (App Router) + TypeScript + Tailwind CSS + Prisma (PostgreSQL). Autenticación propia, liviana, sin dependencias externas (hash de contraseña con `scrypt` nativo de Node, sesión firmada con `HMAC` nativo de Node — nada de servicios de terceros).
+- **Stack**: Next.js 16 (App Router) + React 19 + TypeScript + Tailwind CSS + Prisma (PostgreSQL). Autenticación propia, liviana, sin dependencias externas (hash de contraseña con `scrypt` nativo de Node, sesión firmada con `HMAC` nativo de Node — nada de servicios de terceros).
 
-> **Importante:** este proyecto se escribió completo (código, estilos, base de datos, autenticación) pero **no pude instalar dependencias ni correrlo dentro de este entorno**, porque el sandbox no tiene acceso a los registros de paquetes (npm) por política de red. Revisé a mano cada archivo e imports para que compile, pero el primer `npm install && npm run dev` conviene hacerlo vos localmente (o dejar que Vercel lo haga en el deploy) para confirmar que todo levanta antes de darlo por cerrado.
+> **Nota de versión:** el proyecto arrancó pinneado en Next.js 14, pero esa versión dejó de recibir parches de seguridad en octubre 2025. Se actualizó a Next.js 16 (la versión estable y soportada) antes del primer deploy. Si corriste `npm install` con el `package.json` viejo, corré `npm install` de nuevo para traer las versiones actualizadas.
 
 ---
 
