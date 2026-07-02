@@ -14,13 +14,13 @@ export default function ProjectCard({ project }: { project: Project }) {
       rel="noopener noreferrer"
       className="group flex flex-col overflow-hidden rounded-2xl border border-line bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg"
     >
-      <div className="aspect-[4/3] w-full overflow-hidden bg-paper">
+      <div className="aspect-video w-full overflow-hidden bg-digital">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={project.imageUrl}
           alt={project.name}
           loading="lazy"
-          className="h-full w-full object-cover transition duration-300 group-hover:scale-105"
+          className="h-full w-full object-contain transition duration-300 group-hover:scale-105"
         />
       </div>
       <div className="flex flex-1 flex-col p-5">
