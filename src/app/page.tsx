@@ -13,7 +13,7 @@ export default async function HomePage() {
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/streambe-logo.svg" alt="Streambe" className="mx-auto h-12" />
           <h1 className="mt-8 font-display text-4xl font-semibold text-white sm:text-5xl">
-            Mejor tecnología. Mejor futuro.
+            Better tech. Better future.
           </h1>
           <p className="mx-auto mt-4 max-w-2xl text-lg text-white/70">
             Conocé los proyectos en los que estamos trabajando en Streambe.
