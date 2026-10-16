@@ -1,10 +1,17 @@
+import FileUploadField from "@/components/FileUploadField";
+
 type ProjectDefaults = {
   name?: string;
   description?: string;
   imageUrl?: string;
   projectUrl?: string;
+  brochureUrl?: string | null;
+  imageFit?: string;
   order?: number;
 };
+
+const inputClass =
+  "w-full rounded-lg border border-line px-3 py-2 text-sm focus:border-tech focus:outline-none focus:ring-2 focus:ring-tech/30";
 
 export default function ProjectForm({
   action,
@@ -16,7 +23,7 @@ export default function ProjectForm({
   defaultValues?: ProjectDefaults;
 }) {
   return (
-    <form action={action} className="space-y-4 rounded-xl border border-line bg-white p-6">
+    <form action={action} className="space-y-5 rounded-xl border border-line bg-white p-6">
       <div>
         <label className="mb-1 block text-sm font-medium text-ink">Nombre del proyecto</label>
         <input
@@ -24,33 +31,49 @@ export default function ProjectForm({
           name="name"
           required
           defaultValue={defaultValues?.name}
-          className="w-full rounded-lg border border-line px-3 py-2 text-sm focus:border-tech focus:outline-none focus:ring-2 focus:ring-tech/30"
+          className={inputClass}
         />
       </div>
+
       <div>
         <label className="mb-1 block text-sm font-medium text-ink">Descripción corta</label>
         <textarea
           name="description"
           rows={3}
           defaultValue={defaultValues?.description}
-          className="w-full rounded-lg border border-line px-3 py-2 text-sm focus:border-tech focus:outline-none focus:ring-2 focus:ring-tech/30"
+          className={inputClass}
         />
       </div>
+
+      <FileUploadField
+        name="imageUrl"
+        label="Imagen de la tarjeta"
+        kind="image"
+        required
+        defaultValue={defaultValues?.imageUrl}
+        help="PNG, JPG, WebP, GIF o SVG, hasta 10 MB. Podés subirla desde tu computadora o pegar un link."
+      />
+
       <div>
-        <label className="mb-1 block text-sm font-medium text-ink">URL de la imagen</label>
-        <input
-          type="url"
-          name="imageUrl"
-          required
-          placeholder="https://..."
-          defaultValue={defaultValues?.imageUrl}
-          className="w-full rounded-lg border border-line px-3 py-2 text-sm focus:border-tech focus:outline-none focus:ring-2 focus:ring-tech/30"
-        />
-        <p className="mt-1 text-xs text-ink/50">
-          Pegá el link directo a una imagen (jpg, png o webp) ya subida a algún servicio como
-          Google Drive (compartido públicamente), Imgur o el propio sitio del proyecto.
-        </p>
+        <label className="mb-1 block text-sm font-medium text-ink">Cómo ajustar la imagen</label>
+        <select
+          name="imageFit"
+          defaultValue={defaultValues?.imageFit ?? "contain"}
+          className={inputClass}
+        >
+          <option value="contain">Mostrar completa (sin recortar, con fondo difuminado)</option>
+          <option value="cover">Llenar toda la tarjeta (puede recortar los bordes)</option>
+        </select>
       </div>
+
+      <FileUploadField
+        name="brochureUrl"
+        label="Brochure (opcional)"
+        kind="brochure"
+        defaultValue={defaultValues?.brochureUrl}
+        help="Subí un PDF (botón «Descargar brochure») o pegá el link de una página web o PDF externo (botón «Ver brochure»). Dejalo vacío para no mostrar botón."
+      />
+
       <div>
         <label className="mb-1 block text-sm font-medium text-ink">URL del proyecto</label>
         <input
@@ -59,9 +82,10 @@ export default function ProjectForm({
           required
           placeholder="https://..."
           defaultValue={defaultValues?.projectUrl}
-          className="w-full rounded-lg border border-line px-3 py-2 text-sm focus:border-tech focus:outline-none focus:ring-2 focus:ring-tech/30"
+          className={inputClass}
         />
       </div>
+
       <div>
         <label className="mb-1 block text-sm font-medium text-ink">
           Orden (menor número aparece primero)
@@ -73,6 +97,7 @@ export default function ProjectForm({
           className="w-32 rounded-lg border border-line px-3 py-2 text-sm focus:border-tech focus:outline-none focus:ring-2 focus:ring-tech/30"
         />
       </div>
+
       <button
         type="submit"
         className="rounded-lg bg-tech px-5 py-2.5 text-sm font-semibold text-white hover:bg-digital"

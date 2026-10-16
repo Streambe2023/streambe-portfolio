@@ -67,7 +67,9 @@ Desde `/admin`:
 
 - **Agregar**: botón "+ Nuevo proyecto" → nombre, descripción corta, URL de imagen, URL del proyecto, orden.
 - **Editar / Eliminar**: desde la tabla del panel.
-- El campo de imagen es un **link directo a una imagen ya subida** (jpg/png/webp) — por ejemplo, un archivo de Google Drive compartido públicamente, Imgur, o una imagen ya alojada en el sitio del proyecto. No hay upload de archivos en esta versión (se priorizó simplicidad); si más adelante querés subir imágenes directamente desde el panel, se puede sumar con Cloudinary o similar.
+- **Imagen**: se puede subir un archivo (PNG, JPG, WebP, GIF o SVG, hasta 10 MB) desde tu computadora, o pegar un link. Por proyecto se elige cómo ajustarla: "mostrar completa" (sin recortar, con fondo difuminado) o "llenar toda la tarjeta".
+- **Brochure**: se puede subir un PDF (hasta 30 MB). Si está cargado, la tarjeta muestra el botón "Descargar brochure".
+- Los archivos se guardan en Supabase Storage (bucket público `portfolio`, se crea solo la primera vez). Requiere las variables `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` (también en Vercel). La clave `service_role` es secreta: nunca la subas a GitHub.
 - El campo "Orden" define en qué posición aparece cada tarjeta en la landing (menor número, primero).
 
 ## 5. Agregar o cambiar el usuario admin

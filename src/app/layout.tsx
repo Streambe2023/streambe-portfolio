@@ -16,9 +16,31 @@ const inter = Inter({
   display: "swap",
 });
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL
+    ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+    : "https://streambe-portfolio.vercel.app");
+
+const title = "Streambe | Portfolio de proyectos";
+const description = "Conocé los proyectos, productos y plataformas que desarrolla Streambe.";
+
 export const metadata: Metadata = {
-  title: "Streambe | Portfolio de proyectos",
-  description: "Portfolio comercial de los proyectos de Streambe.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    siteName: "Streambe",
+    type: "website",
+    locale: "es_AR",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
